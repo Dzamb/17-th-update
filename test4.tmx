@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="left-down" width="300" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="1">
+ <tileset firstgid="1" name="vilage" tilewidth="64" tileheight="80" tilecount="37" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="16" height="48" source="sprites/vilage/sliced-tileset/ground.png"/>
+  </tile>
+  <tile id="1">
+   <image width="16" height="48" source="sprites/vilage/sliced-tileset/ground-b.png"/>
+  </tile>
+  <tile id="2">
+   <image width="48" height="32" source="sprites/vilage/sliced-tileset/ground-corner.png"/>
+  </tile>
+  <tile id="3">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/ground-right-corner.png"/>
+  </tile>
+  <tile id="4">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/ground-shadow.png"/>
+  </tile>
+  <tile id="5">
+   <image width="32" height="32" source="sprites/vilage/sliced-tileset/ground-wall.png"/>
+  </tile>
+  <tile id="6">
+   <image width="48" height="32" source="sprites/vilage/sliced-tileset/ground-wall-b.png"/>
+  </tile>
+  <tile id="7">
+   <image width="32" height="16" source="sprites/vilage/sliced-tileset/ground-wood-legs.png"/>
+  </tile>
+  <tile id="8">
+   <image width="32" height="32" source="sprites/vilage/sliced-tileset/left-corner.png"/>
+  </tile>
+  <tile id="9">
+   <image width="64" height="80" source="sprites/vilage/sliced-tileset/left-roof.png"/>
+  </tile>
+  <tile id="10">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/left-slope.png"/>
+  </tile>
+  <tile id="11">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/right-corner.png"/>
+  </tile>
+  <tile id="12">
+   <image width="32" height="80" source="sprites/vilage/sliced-tileset/right-roof.png"/>
+  </tile>
+  <tile id="13">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/right-slope.png"/>
+  </tile>
+  <tile id="14">
+   <image width="16" height="80" source="sprites/vilage/sliced-tileset/roof.png"/>
+  </tile>
+  <tile id="15">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/shadow.png"/>
+  </tile>
+  <tile id="16">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/slope.png"/>
+  </tile>
+  <tile id="17">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs.png"/>
+  </tile>
+  <tile id="18">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs-left.png"/>
+  </tile>
+  <tile id="19">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs-mirror.png"/>
+  </tile>
+  <tile id="20">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs-mirror-left.png"/>
+  </tile>
+  <tile id="21">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs-mirror-right.png"/>
+  </tile>
+  <tile id="22">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs-right.png"/>
+  </tile>
+  <tile id="23">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs-wall.png"/>
+  </tile>
+  <tile id="24">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs-wall-left.png"/>
+  </tile>
+  <tile id="25">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs-wall-mirror.png"/>
+  </tile>
+  <tile id="26">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs-wall-mirror-left.png"/>
+  </tile>
+  <tile id="27">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs-wall-mirror-right.png"/>
+  </tile>
+  <tile id="28">
+   <image width="16" height="32" source="sprites/vilage/sliced-tileset/stairs-wall-right.png"/>
+  </tile>
+  <tile id="29">
+   <image width="32" height="32" source="sprites/vilage/sliced-tileset/top-left-wood.png"/>
+  </tile>
+  <tile id="30">
+   <image width="32" height="32" source="sprites/vilage/sliced-tileset/top-right-wood.png"/>
+  </tile>
+  <tile id="31">
+   <image width="16" height="16" source="sprites/vilage/sliced-tileset/top-wood.png"/>
+  </tile>
+  <tile id="32">
+   <image width="16" height="16" source="sprites/vilage/sliced-tileset/wall.png"/>
+  </tile>
+  <tile id="33">
+   <image width="16" height="16" source="sprites/vilage/sliced-tileset/wall-b.png"/>
+  </tile>
+  <tile id="34">
+   <image width="32" height="64" source="sprites/vilage/sliced-tileset/window.png"/>
+  </tile>
+  <tile id="35">
+   <image width="32" height="64" source="sprites/vilage/sliced-tileset/window-bars.png"/>
+  </tile>
+  <tile id="36">
+   <image width="32" height="16" source="sprites/vilage/sliced-tileset/wood-legs.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="38" name="background" tilewidth="4800" tileheight="1280" tilecount="1" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="4800" height="1280" source="sprites/background_tile.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="39" name="houses" tilewidth="221" tileheight="244" tilecount="10" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="24" height="30" source="sprites/vilage/GothicVania props-sliced/barrel.png"/>
+  </tile>
+  <tile id="1">
+   <image width="39" height="35" source="sprites/vilage/GothicVania props-sliced/crate.png"/>
+  </tile>
+  <tile id="2">
+   <image width="73" height="68" source="sprites/vilage/GothicVania props-sliced/crate-stack.png"/>
+  </tile>
+  <tile id="4">
+   <image width="168" height="183" source="sprites/vilage/GothicVania props-sliced/house-a.png"/>
+  </tile>
+  <tile id="5">
+   <image width="210" height="244" source="sprites/vilage/GothicVania props-sliced/house-b.png"/>
+  </tile>
+  <tile id="6">
+   <image width="221" height="183" source="sprites/vilage/GothicVania props-sliced/house-c.png"/>
+  </tile>
+  <tile id="7">
+   <image width="37" height="45" source="sprites/vilage/GothicVania props-sliced/sign.png"/>
+  </tile>
+  <tile id="8">
+   <image width="35" height="108" source="sprites/vilage/GothicVania props-sliced/street-lamp.png"/>
+  </tile>
+  <tile id="9">
+   <image width="93" height="75" source="sprites/vilage/GothicVania props-sliced/wagon.png"/>
+  </tile>
+  <tile id="10">
+   <image width="65" height="65" source="sprites/vilage/GothicVania props-sliced/well.png"/>
+  </tile>
+ </tileset>
+ <imagelayer id="4" name="background">
+  <image source="sprites/background.png" width="4800" height="1280"/>
+ </imagelayer>
+ <layer id="3" name="ground" width="300" height="80">
+  <data encoding="base64" compression="zlib">
+   eJztzsEJAEAIA0G9/ovWJoRTZiDsNxEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwR/beof7wQVVnCrBFAdgbAcM=
+  </data>
+ </layer>
+</map>
