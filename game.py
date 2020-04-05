@@ -39,8 +39,8 @@ def load_texture_pair(filename):
         arcade.load_texture(filename, mirrored=True)
     ]
 
-# class Fireball(arcade.Sprite):
-#     def update(self):
+class Fireball(arcade.Sprite):
+    def update(self):
         
 
 class PlayerCharacter(arcade.Sprite):
