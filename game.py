@@ -41,7 +41,7 @@ def load_texture_pair(filename):
 
 class Fireball(arcade.Sprite):
     def update(self):
-        
+        self.center_x += self.change_x
 
 class PlayerCharacter(arcade.Sprite):
     def __init__(self):
@@ -186,7 +186,6 @@ class PlayerCharacter(arcade.Sprite):
 
 
 class MyGame(arcade.Window):
-    """ Main application class. """
 
     def __init__(self):
         """
@@ -206,10 +205,7 @@ class MyGame(arcade.Window):
         self.jump_needs_reset = False
 
         #* Это списки которые отслеживают наши спрайты. Каждый спрайт должен войти в список.
-        #TODO: self.coin_list = None
         self.wall_list = None
-        #? self.background_list = None
-        #TODO: self.ladder_list = None
         self.player_list = None
         self.background = None
 
@@ -222,20 +218,12 @@ class MyGame(arcade.Window):
         #* Используем для отслеживания нашего скролинга
         self.view_bottom = 0
         self.view_left = 0
-        #TODO: self.view_right = 0
-        #TODO: self.view_top = 0
 
         #* Настраиваем конец карты
         self.end_of_map = 0
 
         #* Отслеживание очков
         self.score = 0
-
-        #* Ещё несколько параметров для реализации
-        #TODO: self.game_over = False
-        #TODO: self.last_time = None
-        #TODO: self.frame_count = 0
-        #TODO: self.fps_message = None
 
         #* Загрузка свуковых эффектов
         #TODO: self.collect_coin_sound = arcade.load_sound("указываем расположение файла")
@@ -252,12 +240,10 @@ class MyGame(arcade.Window):
         #? Нужно ли опять писать это тут когда написано выше? Но делаю по примеру.
         self.view_bottom = 0
         self.view_left = 0
-        #TODO: self. view_score = 0
 
         #* Создаём спрайт листы
         self.player_list = arcade.SpriteList()
         self.player_sprite = arcade.SpriteList()
-        #TODO: self.coin_list = arcade.SpriteList()
 
         #* Ссылаемся что список игрока равен классу что мы уже описали
         self.player_sprite = PlayerCharacter()
@@ -281,25 +267,6 @@ class MyGame(arcade.Window):
         #* --- Слой земли ---
         self.wall_list = arcade.tilemap.process_layer(my_map, 'ground', 1)
 
-        #* --- Слой монеток (пока не реализовано) ---
-        #TODO: self.coin_list = arcade.tilemap.process_layer(my_map, coin_layer_name, TILE_SCALING)
-
-        #* Движущиеся платформы
-        #TODO: moving_platforms_list = arcade.tilemap.process_layer(my_map, moving_platforms_layer, TILE_SCALING)
-        #TODO: for sprite in moving_platforms_list:
-        #TODO:    self.wall_list.append(sprite)
-
-        #* Объекты заднего фона
-        #TODO: self.background_list = arcade.tilemap.process_layer(my_map, "Background", TILE_SCALING)
-
-        #* Лестницы
-        #TODO: self.ladder_list = arcade.tilemap.process_layer(my_map, "Ladders", TILE_SCALING)
-
-        
-        # --- Other stuff
-        # Set the background color
-        # if my_map.background_color:
-        #     arcade.set_background_color(my_map.background_color)
 
         #* Создаём физический движок
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,
@@ -308,23 +275,13 @@ class MyGame(arcade.Window):
 
 
     def on_draw(self):
-        """
-        Render the screen.
-        """
+
         arcade.start_render()
         self.player_list.draw()
 
         #* Рисуем наши спрайты.
         self.wall_list.draw()
         self.background.draw()
-        #TODO: self.background_list.draw()
-        #TODO: self.ladder_list.draw()
-        #TODO: self.coin_list.draw()
-
-        #* Отрисовка очков на экране, прокрутка по области просмотра
-        # score_text = f"Score: {self.score}"
-        # arcade.draw_text(score_text, 10 + self.view_left, 10 + view_bottom, arcade.scccolor.BLACK, 18)
-
 
     def process_keychange(self):
         #* Вызывается когда мы надимаем клавиши вверх/вниз или когда мы включаем/ выключаем лестницы
@@ -356,7 +313,6 @@ class MyGame(arcade.Window):
         else:
             self.player_sprite.change_x = 0
         
-
 
 
     def on_key_press(self, key, modifiers):
@@ -416,9 +372,6 @@ class MyGame(arcade.Window):
             self.process_keychange()
 
 
-        #TODO: self.coin_list.update_animation(delta_time)
-        #TODO: self.background_list.update_animation(delta_time)
-
         #* Логика отображающая не наткнулась ли движущаяся платформа
         #* на преграду и не надо ли повернуть движение.
         for wall in self.wall_list:
@@ -431,23 +384,6 @@ class MyGame(arcade.Window):
                 wall.change_y *= -1
             if wall.boundary_bottom and wall.bottom < wall.boundary_bottom and wall.change_y < 0:
                 wall.change_y *= -1
-
-        #* Отслеживание столкновений с монетками.
-        # coin_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.coin_list)
-
-        #* Цикл отслеживает со сколькими монетами мы столкнулись и удаляет их
-        # for coin in coin_hit_list:
-
-        #     #* Выясняем сколько очков стоит монетка
-        #     if 'Points' not in coin.properties:
-        #         print("Внимание собранная монетка не имеет характеристику очков")
-        #     else:
-        #         points = int(coin.properties['Points'])
-        #         self.score += points
-
-        #     #* Удаление монетки.
-        #     coin.remove_from_sprite_lists()
-        #     arcade.play_sound(self.collect_coin_sound)
 
         #* Отслеживание нужно ли нам поменять обзор(viewport)
         changed_viewport = False
