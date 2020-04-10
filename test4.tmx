@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="left-down" width="300" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="1">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="left-down" width="300" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="1">
  <tileset firstgid="1" name="background" tilewidth="4800" tileheight="1280" tilecount="1" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="1">
@@ -199,6 +199,11 @@
   </tile>
   <tile id="15">
    <image width="16" height="16" source="resources/locations/dungeon/image_part_016.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="4.5" y="5.75">
+     <polygon points="-0.484375,0.28125 1.625,-1.75 5.4375,-1.6875 7.4375,0.25 7.5,4.1875 5.375,6.125 1.625,6.125 -0.5,4.125"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="16">
    <image width="16" height="16" source="resources/locations/dungeon/image_part_017.png"/>
@@ -753,7 +758,7 @@
    <image width="16" height="16" source="resources/locations/dungeon/image_part_310.png"/>
   </tile>
  </tileset>
- <tileset firstgid="411" name="enemies" tilewidth="150" tileheight="150" tilecount="1" columns="0">
+ <tileset firstgid="399" name="enemies" tilewidth="150" tileheight="150" tilecount="1" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="150" height="150" source="resources/enemies/Goblin/Goblin_Idle_0.png"/>
@@ -769,14 +774,29 @@
    eJzt1j0KwCAMBlBP2D+o9z9KcbZKyFApvLdkSAxfNksBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAP9tUBAIDPHMG5M7H7Srxp7sBMnfSiWWe3Z7O//aO2QQUAAACg9wBLOwQa
   </data>
  </layer>
+ <layer id="8" name="flags" width="300" height="80">
+  <data encoding="base64" compression="zlib">
+   eJzt2kEJAAAIADH7f6wsYghRtgCX4CIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYOTRNgAAAAAAAAAAwHdbD5b3CwAAAGgFchQCPQ==
+  </data>
+ </layer>
+ <layer id="9" name="dont_touch" width="300" height="80">
+  <data encoding="base64" compression="zlib">
+   eJzty7EJAAAIwDD/v9QzXJ0ExTGBjo0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPiRrcuz+b5+AAAAYFbJUwn5
+  </data>
+ </layer>
+ <layer id="10" name="coins" width="300" height="80">
+  <data encoding="base64" compression="zlib">
+   eJzt2rENAEAIAkDHdf8JnOC/siDxLqGHnioAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+OtHAAAAAAAAAAAAyJP499rqlLQJAAAALhlwhge5
+  </data>
+ </layer>
  <layer id="3" name="platforms" width="300" height="80">
   <data encoding="base64" compression="zlib">
-   eJztzsEJACEMRUEtTi1h7c1mtQeziDgD4d0+SQkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9ox8+gPgZS3oAP5Sgvdq8B4AAAAAAAAAAABwzreuq6pe0AngwGyw
+   eJztzMEJACAMBME0p5ag/VdiiohIYAaO/V0EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD0tYoG8Moo/pvFfwAAAAAAAAAAAMA/O3dUVRv0As1ibBQ=
   </data>
  </layer>
  <layer id="7" name="enemies" width="300" height="80">
   <data encoding="base64" compression="zlib">
-   eJzty0ENAAAIBKCzfwTLGsM54U8CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFzQtXMBAACA3waICQE5
+   eJzt2MEJACAMBMGk/4ct20JQQhBnKrjvbQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQN3K6QUAAAAAAPCvm06v8QMAALzl9Mf5f3TYYp4C0Q==
   </data>
  </layer>
 </map>

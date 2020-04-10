@@ -1,6 +1,7 @@
 import arcade
 import os
 from variables import *
+import math
 
 def load_texture_pair(filename):
     return [
@@ -146,3 +147,7 @@ class PlayerCharacter(arcade.Sprite):
                 self.cur_texture = 0
             self.texture = self.die_texture_pair[self.cur_texture // UPDATES_PER_FRAME][self.character_face_direction]
             return
+
+def get_distance_between_sprites(sprite1, sprite2) -> float:
+    distance = math.sqrt((sprite1.center_x - sprite2.center_x) ** 2 + (sprite1.center_y - sprite2.center_y) ** 2)
+    return distance
