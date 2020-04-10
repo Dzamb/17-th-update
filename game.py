@@ -249,12 +249,12 @@ class MyGame(arcade.Window):
             # Remove the coin
             coin.remove_from_sprite_lists()
 
-            enemy_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.enemy_list)
-            for enemy in enemy_hit_list:
-                if "points" not in enemy.properties:
-                    print("Warning, collected a coin without a Points property.")
-                else:
-                    points = int(enemy.properties['Points'])
+        enemy_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.enemy_list)
+        for enemy in enemy_hit_list:
+            if "points" not in enemy.properties:
+                print("Warning, collected a coin without a Points property.")
+            else:
+                points = int(enemy.properties['Points'])
                 self.score += points
             enemy.remove_from_sprite_lists()
 
