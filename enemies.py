@@ -2,19 +2,17 @@ import arcade
 import math
 from variables import *
 
+class Fireball(arcade.Sprite):
+    def update(self):
+        self.center_x += self.change_x
+        self.center_y += self.change_y
+        self.angle += 20
 
-# def load_texture_pair(filename):
-#     return [
-#         arcade.load_texture(filename),
-#         arcade.load_texture(filename, mirrored=True)
-#     ]
 
 class Goblin(arcade.Sprite):
-    def __init__(self, scale: float = 1,
-                 image_x: float = 0, image_y: float = 0,
-                 center_x: float = 0, center_y: float = 0):
-        super().__init__(scale=scale, image_x=image_x, image_y=image_y,
-                         center_x=center_x, center_y=center_y)
+    def __init__(self):
+        super().__init__()
+
         self.state = FACE_RIGHT
         self.stand_right_textures = None
         self.stand_left_textures = None

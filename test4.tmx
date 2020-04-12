@@ -204,15 +204,36 @@
      <polygon points="-0.484375,0.28125 1.625,-1.75 5.4375,-1.6875 7.4375,0.25 7.5,4.1875 5.375,6.125 1.625,6.125 -0.5,4.125"/>
     </object>
    </objectgroup>
+   <animation>
+    <frame tileid="15" duration="120"/>
+    <frame tileid="16" duration="120"/>
+    <frame tileid="17" duration="120"/>
+    <frame tileid="18" duration="120"/>
+   </animation>
   </tile>
   <tile id="16">
    <image width="16" height="16" source="resources/locations/dungeon/image_part_017.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="5" y="6.17391">
+     <polygon points="0,0 2,-2.13043 3.95652,-2.08696 5.95652,-0.130435 6,3.82609 4,5.73913 2.08696,5.73913 0.0434783,3.73913"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="17">
    <image width="16" height="16" source="resources/locations/dungeon/image_part_018.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="5.95652" y="5.08696">
+     <polygon points="0,0 1,-0.956522 2.95652,-1.04348 3.95652,-0.0434783 4.04348,5.91304 3.04348,6.82609 1.08696,6.86957 0.0434783,5.86957"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="18">
    <image width="16" height="16" source="resources/locations/dungeon/image_part_019.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="5" y="6.04348">
+     <polygon points="0,0 2.04348,-2 3.95652,-2 5.95652,0.0434783 5.91304,3.82609 4.04348,5.82609 1.95652,5.86957 -0.0869565,3.91304"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="19">
    <image width="16" height="16" source="resources/locations/dungeon/image_part_020.png"/>
@@ -273,15 +294,41 @@
   </tile>
   <tile id="38">
    <image width="16" height="16" source="resources/locations/dungeon/image_part_039.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="5.04348" y="6.13043">
+     <polygon points="0,0 1.95652,-2.04348 3.86957,-2.04348 5.86957,-0.130435 6,3.73913 4,5.86957 2,5.86957 0,3.82609"/>
+    </object>
+   </objectgroup>
+   <animation>
+    <frame tileid="38" duration="120"/>
+    <frame tileid="39" duration="120"/>
+    <frame tileid="40" duration="120"/>
+    <frame tileid="41" duration="120"/>
+   </animation>
   </tile>
   <tile id="39">
    <image width="16" height="16" source="resources/locations/dungeon/image_part_040.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6.08696" y="5.08696">
+     <polygon points="0,0 0.869565,-1.08696 2.91304,-1.08696 3.95652,-0.0434783 4,5.86957 2.91304,6.91304 0.869565,7 -0.0869565,5.86957"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="40">
    <image width="16" height="16" source="resources/locations/dungeon/image_part_041.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="5.13043" y="6.13043">
+     <polygon points="0,0 1.82609,-2.13043 3.78261,-2.13043 5.86957,-0.173913 5.86957,3.78261 3.86957,5.82609 1.86957,5.82609 -0.173913,3.91304"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="41">
    <image width="16" height="16" source="resources/locations/dungeon/image_part_042.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="6.04348" y="5.04348">
+     <polygon points="0,0 0.956522,-0.956522 2.91304,-0.956522 3.82609,-0.0434783 3.95652,5.82609 3,6.91304 0.913043,6.91304 -0.0434783,5.86957"/>
+    </object>
+   </objectgroup>
   </tile>
   <tile id="46">
    <image width="16" height="16" source="resources/locations/dungeon/image_part_047.png"/>
@@ -762,6 +809,56 @@
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="150" height="150" source="resources/enemies/Goblin/Goblin_Idle_0.png"/>
+  </tile>
+ </tileset>
+ <tileset firstgid="400" name="coins" tilewidth="128" tileheight="128" tilecount="5" columns="0">
+  <grid orientation="orthogonal" width="1" height="1"/>
+  <tile id="0">
+   <image width="128" height="128" source="resources/treasures/coin_0.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="10" y="33.5">
+     <polygon points="0,0 38.5,-32.5 69.5,-33.5 108.5,-2 110,61.5 70,93.5 38.5,93.5 -1.5,62"/>
+    </object>
+   </objectgroup>
+   <animation>
+    <frame tileid="0" duration="120"/>
+    <frame tileid="1" duration="120"/>
+    <frame tileid="2" duration="120"/>
+    <frame tileid="3" duration="120"/>
+    <frame tileid="4" duration="120"/>
+   </animation>
+  </tile>
+  <tile id="1">
+   <image width="128" height="128" source="resources/treasures/coin_1.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="25" y="33.5">
+     <polygon points="0,0 23,-31.5 54,-32 79,-0.5 79,69.5 54.5,94 23,95 0,69.5"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="2">
+   <image width="128" height="128" source="resources/treasures/coin_2.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="41" y="34">
+     <polygon points="0,0 14.5,-31.5 30,-32.5 46.5,-2 46.5,61.5 31.5,93 15.5,94 -0.5,60.5"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="3">
+   <image width="128" height="128" source="resources/treasures/coin_3.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="25.5" y="33">
+     <polygon points="0,0 23.5,-32.5 55,-32.5 78,-1 77.5,70 54.5,94.5 23,94.5 -1.5,70.5"/>
+    </object>
+   </objectgroup>
+  </tile>
+  <tile id="4">
+   <image width="128" height="128" source="resources/treasures/coin_4.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="9" y="33.5">
+     <polygon points="0,0 39,-32.5 69.5,-32.5 102,-1.5 103.5,61 70,95 38,93.5 -2,61"/>
+    </object>
+   </objectgroup>
   </tile>
  </tileset>
  <layer id="5" name="background" width="300" height="80">

@@ -5,7 +5,7 @@ import time
 import math
 from variables import *
 from player import PlayerCharacter
-
+from enemies import Goblin
 
 
 class MyGame(arcade.Window):
@@ -37,6 +37,7 @@ class MyGame(arcade.Window):
         self.player_sprite = None
         self.physics_engine = None
         self.enemy_list = None
+        self.goblin_sprite = None
 
         #* Используем для отслеживания нашего скролинга
         self.view_bottom = 0
@@ -73,9 +74,11 @@ class MyGame(arcade.Window):
         self.player_sprite = arcade.SpriteList()
         self.coin_list = arcade.SpriteList()
         self.enemy_list = arcade.SpriteList()
+        self.goblin_sprite = arcade.SpriteList()
 
         #* Ссылаемся что список игрока равен классу что мы уже описали
         self.player_sprite = PlayerCharacter()
+        self.goblin_sprite = Goblin()
 
         #* Задаём начальные координаты старта персонажа, его размеры.
         self.player_sprite.center_x = PLAYER_START_X
@@ -91,30 +94,21 @@ class MyGame(arcade.Window):
         #* Вычисляем правый конец карты в пикселях
         # self.end_of_map = my_map.map_size.width * GRID_PIXEL_SIZE
 
-        #* --- Слой земли ---
+        #* --- Слой земли и декораций---
         self.background_list = arcade.process_layer(my_map, "background", TILE_SCALING)
         self.vilage_list = arcade.process_layer(my_map, "vilage", TILE_SCALING)
         self.wall_list = arcade.process_layer(my_map, "platforms", TILE_SCALING)
 
-        #* --- Слой монеток (пока не реализовано) ---
+        #* --- Слой монеток ---
         coin_layer_name = "coins"
         self.coin_list = arcade.process_layer(my_map, coin_layer_name, COIN_SCALE)
 
+        #* --- Слой врагов ---
         enemy_layer_name = "enemies"
         self.enemy_list = arcade.process_layer(my_map, enemy_layer_name, TILE_SCALING)
 
-
-        #* Объекты заднего фона
-        #TODO: self.background_list = arcade.tilemap.process_layer(my_map, "Background", TILE_SCALING)
-
-        #* Лестницы
+        #* --- Лестницы ---
         #TODO: self.ladder_list = arcade.tilemap.process_layer(my_map, "Ladders", TILE_SCALING)
-
-        
-        # --- Other stuff
-        # Set the background color
-        # if my_map.background_color:
-        #     arcade.set_background_color(my_map.background_color)
 
         #* Создаём физический движок
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,
@@ -125,7 +119,6 @@ class MyGame(arcade.Window):
     def on_draw(self):
 
         arcade.start_render()
-        
 
         #* Рисуем наши спрайты.
         self.background_list.draw()
@@ -134,8 +127,8 @@ class MyGame(arcade.Window):
         self.coin_list.draw()
         self.enemy_list.draw()
         self.player_list.draw()
-        
-        #TODO: self.background_list.draw()
+        self.goblin_sprite.draw()
+
         #TODO: self.ladder_list.draw()
         #TODO: self.coin_list.draw()
 
@@ -214,7 +207,6 @@ class MyGame(arcade.Window):
     def on_update(self, delta_time):
         self.player_list.update_animation()
         self.wall_list.update()
-        #* Процесс обновления спрайтов и игровой логики.
 
         #* Движение игрока с физическим движком
         self.physics_engine.update()
