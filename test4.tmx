@@ -809,6 +809,11 @@
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="150" height="150" source="resources/enemies/Goblin/Goblin_Idle_0.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="60.5" y="100.25">
+     <polygon points="0,0 5,-7.5 -4,-19.75 7.75,-33.25 17.75,-36.75 25.25,-32 31.25,-16.25 25,1"/>
+    </object>
+   </objectgroup>
   </tile>
  </tileset>
  <tileset firstgid="400" name="coins" tilewidth="128" tileheight="128" tilecount="5" columns="0">

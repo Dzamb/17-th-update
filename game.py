@@ -78,7 +78,7 @@ class MyGame(arcade.Window):
 
         #* Ссылаемся что список игрока равен классу что мы уже описали
         self.player_sprite = PlayerCharacter()
-        self.goblin_sprite = Goblin()
+        # self.goblin_sprite = Goblin()
 
         #* Задаём начальные координаты старта персонажа, его размеры.
         self.player_sprite.center_x = PLAYER_START_X
@@ -89,7 +89,6 @@ class MyGame(arcade.Window):
         #* Задаём какую карту загружать и где она расположена
         map_name = "test4.tmx"
         my_map = arcade.tilemap.read_tmx(map_name)
-        # my_map = arcade.read_tiled_map(map_name)
 
         #* Вычисляем правый конец карты в пикселях
         # self.end_of_map = my_map.map_size.width * GRID_PIXEL_SIZE
@@ -105,7 +104,14 @@ class MyGame(arcade.Window):
 
         #* --- Слой врагов ---
         enemy_layer_name = "enemies"
-        self.enemy_list = arcade.process_layer(my_map, enemy_layer_name, TILE_SCALING)
+        e_list = arcade.process_layer(my_map, enemy_layer_name, TILE_SCALING)
+        for e in e_list:
+            enemy = Goblin()
+            enemy.center_x = e.center_x
+            enemy.center_y = e.center_y + 64
+            enemy.scale = 1
+            enemy.change_x = -ENEMY_SPEED
+            self.enemy_list.append(enemy)
 
         #* --- Лестницы ---
         #TODO: self.ladder_list = arcade.tilemap.process_layer(my_map, "Ladders", TILE_SCALING)
