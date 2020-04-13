@@ -1,3 +1,5 @@
 /env
 /.vscode
 /__pycache__
+/game_ver2.py
+/game_ver3.py
