@@ -6,6 +6,7 @@ import math
 from variables import *
 from player import PlayerCharacter
 from enemies import Goblin
+import math
 
 
 class MyGame(arcade.Window):
@@ -26,6 +27,8 @@ class MyGame(arcade.Window):
         self.up_pressed = False
         self.down_pressed = False
         self.jump_needs_reset = False
+        self.cast_pressed = False
+        self.sword_attack_pressed = False
 
         #* Это списки которые отслеживают наши спрайты. Каждый спрайт должен войти в список.
         self.coin_list = None
@@ -38,6 +41,7 @@ class MyGame(arcade.Window):
         self.physics_engine = None
         self.enemy_list = None
         self.goblin_sprite = None
+        self.fireball_list = None
 
         #* Используем для отслеживания нашего скролинга
         self.view_bottom = 0
@@ -52,15 +56,16 @@ class MyGame(arcade.Window):
         self.score = 0
 
         #* Ещё несколько параметров для реализации
-        #TODO: self.game_over = False
+        self.game_over = False
         #TODO: self.last_time = None
         #TODO: self.frame_count = 0
         #TODO: self.fps_message = None
 
         #* Загрузка свуковых эффектов
-        #TODO: self.collect_coin_sound = arcade.load_sound("указываем расположение файла")
-        #TODO: self.jump_sound = arcade.load_sound("указываем расположение файла")
-        #TODO: self.game_over = arcade.load_sound("указываем расположение файла")
+        self.collect_coin_sound = arcade.load_sound("resources/SFX/coins.wav")
+        self.jump_sound = arcade.load_sound("resources/SFX/jumping.wav")
+        self.game_over = arcade.load_sound("resources/SFX/game-over.wav")
+        self.cast_sound = arcade.load_sound("resources/SFX/fireball.wav")
 
 
     def setup(self):
@@ -75,6 +80,7 @@ class MyGame(arcade.Window):
         self.coin_list = arcade.SpriteList()
         self.enemy_list = arcade.SpriteList()
         self.goblin_sprite = arcade.SpriteList()
+        self.fireball_list = arcade.SpriteList()
 
         #* Ссылаемся что список игрока равен классу что мы уже описали
         self.player_sprite = PlayerCharacter()
@@ -112,6 +118,7 @@ class MyGame(arcade.Window):
             enemy.scale = 1
             enemy.change_x = -ENEMY_SPEED
             self.enemy_list.append(enemy)
+        self.goblin_physics_engine = arcade.PhysicsEnginePlatformer(self.goblin_sprite, self.wall_list, gravity_constant=GRAVITY)
 
         #* --- Лестницы ---
         #TODO: self.ladder_list = arcade.tilemap.process_layer(my_map, "Ladders", TILE_SCALING)
@@ -134,6 +141,7 @@ class MyGame(arcade.Window):
         self.enemy_list.draw()
         self.player_list.draw()
         self.goblin_sprite.draw()
+        self.fireball_list.draw()
 
         #TODO: self.ladder_list.draw()
         #TODO: self.coin_list.draw()
@@ -141,6 +149,47 @@ class MyGame(arcade.Window):
         #* Отрисовка очков на экране, прокрутка по области просмотра
         # score_text = f"Score: {self.score}"
         # arcade.draw_text(score_text, 10 + self.view_left, 10 + view_bottom, arcade.scccolor.BLACK, 18)
+
+    def on_mouse_press(self, x, y, button, modifiers):
+        arcade.play_sound(self.cast_sound)
+        fireball = arcade.Sprite("resources/effects/FireBall_64x64.gif", FIREBALL_SCALE)
+        start_x = self.player_sprite.center_x
+        start_y = self.player_sprite.center_y
+        fireball.center_x = start_x
+        fireball.center_y = start_y
+        dest_x = x
+        dest_y = y
+        x_diff = dest_x - start_x
+        y_diff = dest_y - start_y
+        angle = math.atan2(y_diff, x_diff)
+        fireball.angle = math.degrees(angle)
+        fireball.change_x = math.cos(angle) * FIREBALL_SPEED
+        fireball.change_y = math.sin(angle) * FIREBALL_SPEED
+        self.fireball_list.append(fireball)
+
+
+        # arcade.play_sound(self.cast_sound)
+        # fireball = arcade.Sprite("resources/effects/FireBall_64x64.gif", FIREBALL_SCALE)
+        # if self.player_sprite.character_face_direction == FACE_LEFT:
+        #     fireball.angle = 90
+        #     fireball.change_x = -FIREBALL_SPEED
+        #     fireball.center_x = self.center_x
+        #     fireball.center_y = self.center_y
+        #     fireball.right = self.left
+        # elif self.player_sprite.character_face_direction == FACE_RIGHT:
+        #     fireball.angle = -90
+        #     fireball.change_x = FIREBALL_SPEED
+        #     fireball.center_x = self.center_x
+        #     fireball.center_y = self.center_y
+        #     fireball.left = self.right
+
+        # self.fireball_list.append(fireball)
+
+
+
+
+
+
 
 
     def process_keychange(self):
@@ -153,7 +202,7 @@ class MyGame(arcade.Window):
             elif self.physics_engine.can_jump() and not self.jump_needs_reset:
                 self.player_sprite.change_y = PLAYER_JUMP_SPEED
                 self.jump_needs_reset = True
-                # arcade.play_sound(self.jump_sound)
+
         elif self.down_pressed and not self.up_pressed:
             if self.physics_engine.is_on_ladder():
                 self.player_sprite.change_y = -PLAYER_MOVEMENT_SPEED
@@ -175,7 +224,6 @@ class MyGame(arcade.Window):
         
 
 
-
     def on_key_press(self, key, modifiers):
         #* Вызывается когда мы клавиша нажата.
         if key ==arcade.key.UP or key == arcade.key.W:
@@ -187,8 +235,8 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.right_pressed = True
         elif key == arcade.key.C:
-            self.player_sprite.is_attacking = True
-        
+            self.cast_pressed = True
+
         self.process_keychange()
 
 
@@ -205,7 +253,7 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.right_pressed = False
         elif key == arcade.key.C:
-            self.player_sprite.is_attacking = False
+            self.cast_pressed = False
         
         self.process_keychange()
 
@@ -218,6 +266,8 @@ class MyGame(arcade.Window):
         self.physics_engine.update()
         self.coin_list.update_animation()
         self.enemy_list.update_animation()
+        self.fireball_list.update()
+
 
         #* Обновление анимации
         if self.physics_engine.can_jump():

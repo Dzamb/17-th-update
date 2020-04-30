@@ -32,6 +32,12 @@ class PlayerCharacter(arcade.Sprite):
         self.is_attacking = False
         self.is_casting = False
 
+        self.jump_sound = arcade.load_sound("resources/SFX/jumping.wav")
+        self.cast_sound = arcade.load_sound("resources/SFX/fireball.wav")
+        self.sword_attack_sound = arcade.load_sound("resources/SFX/attack-sword.wav")
+
+        self.fireball_list = arcade.SpriteList()
+
 
 #*   ===Загрузка текстур===
         #* Указываем папку содержащую все изображения
@@ -85,25 +91,48 @@ class PlayerCharacter(arcade.Sprite):
         #? Что такое хит-боксы я пока не разобрался, но вроде нужно
         self.set_hit_box(self.texture.hit_box_points)
 
-
-    def update_animation(self, delta_time=1 /60):
-
+    def sword_attack(self):
         #* анимация атаки мечём
         if self.is_attacking:
+            arcade.play_sound(self.sword_attack_sound)
             self.cur_texture += 1
             if self.cur_texture > 4 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
             self.texture = self.attack_texture_pair[self.cur_texture // UPDATES_PER_FRAME][self.character_face_direction]
             return
 
+# def fireball_cast(self):
+#     arcade.play_sound(self.cast_sound)
+#     fireball = arcade.Sprite("resources/effects/FireBall_64x64.gif", FIREBALL_SCALE)
+#     if self.character_face_direction = FACE_LEFT:
+#         fireball.angle = 90
+#         fireball.change_x = -FIREBALL_SPEED
+#         fireball.center_x = self.center_x
+#         fireball.center_y = self.center_y
+#         fireball.right = self.left
+#     elif self.character_face_direction = FACE_RIGHT:
+#         fireball.angle = -90
+#         fireball.change_x = FIREBALL_SPEED
+#         fireball.center_x = self.center_x
+#         fireball.center_y = self.center_y
+#         fireball.left = self.right
+
+#     self.fireball_list.append(fireball)
+
+
+    def cast(self):
         #* анимация каста заклинания
         if self.is_casting:
+            arcade.play_sound(self.cast_sound)
             self.cur_texture += 1
             if self.cur_texture > 3 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
             self.texture = self.cast_texture_pair[self.cur_texture // UPDATES_PER_FRAME][self.character_face_direction]
             return
 
+
+
+    def update_animation(self, delta_time=1 /60):
 
         #* Указание в какую сторону смотрит персонаж
         if self.change_x < 0 and self.character_face_direction == FACE_RIGHT:
@@ -121,11 +150,13 @@ class PlayerCharacter(arcade.Sprite):
 
         #* анимация прыжка и падения
         if self.change_y > 0 and not self.is_on_ladder:
+            arcade.play_sound(self.jump_sound)
             self.cur_texture += 1
             if self.cur_texture > 3 * UPDATES_PER_FRAME:
                 self.cur_texture = 0
             self.texture = self.jump_texture_pair[self.cur_texture // UPDATES_PER_FRAME][self.character_face_direction]
             return
+
         elif self.change_y < 0 and not self.is_on_ladder:
             self.cur_texture += 1
             if self.cur_texture > 1:
