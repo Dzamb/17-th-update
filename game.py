@@ -66,6 +66,7 @@ class MyGame(arcade.Window):
         self.jump_sound = arcade.load_sound("resources/SFX/jumping.wav")
         self.game_over = arcade.load_sound("resources/SFX/game-over.wav")
         self.cast_sound = arcade.load_sound("resources/SFX/fireball.wav")
+        self.enemy_damage_sound = arcade.load_sound("resources/SFX/monster-damage.wav")
 
 
     def setup(self):
@@ -267,6 +268,14 @@ class MyGame(arcade.Window):
         self.coin_list.update_animation()
         self.enemy_list.update_animation()
         self.fireball_list.update()
+        for fireball in self.fireball_list:
+            enemy_fireball_hitlist = arcade.check_for_collision_with_list(fireball, self.enemy_list)
+            if len(enemy_fireball_hitlist) > 0:
+                fireball.kill()
+            
+            for enemy in enemy_fireball_hitlist:
+                enemy.kill()
+                arcade.play_sound(self.enemy_damage_sound)
 
 
         #* Обновление анимации
