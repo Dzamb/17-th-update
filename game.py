@@ -15,7 +15,7 @@ class MyGame(arcade.Window):
         """
         Initializer
         """
-        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+        super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE, fullscreen=True)
 
 
         file_path = os.path.dirname(os.path.abspath(__file__))
@@ -42,12 +42,11 @@ class MyGame(arcade.Window):
         self.enemy_list = None
         self.goblin_sprite = None
         self.fireball_list = None
+        self.flag_list = None
 
         #* Используем для отслеживания нашего скролинга
         self.view_bottom = 0
         self.view_left = 0
-        #TODO: self.view_right = 0
-        #TODO: self.view_top = 0
 
         #* Настраиваем конец карты
         self.end_of_map = 0
@@ -57,9 +56,6 @@ class MyGame(arcade.Window):
 
         #* Ещё несколько параметров для реализации
         self.game_over = False
-        #TODO: self.last_time = None
-        #TODO: self.frame_count = 0
-        #TODO: self.fps_message = None
 
         #* Загрузка свуковых эффектов
         self.collect_coin_sound = arcade.load_sound("resources/SFX/coins.wav")
@@ -68,12 +64,13 @@ class MyGame(arcade.Window):
         self.cast_sound = arcade.load_sound("resources/SFX/fireball.wav")
         self.enemy_damage_sound = arcade.load_sound("resources/SFX/monster-damage.wav")
 
+        width, height = self.get_size()
+        self.set_viewport(0, width, 0, height)
 
     def setup(self):
 
         self.view_bottom = 0
         self.view_left = 0
-        #TODO: self. view_score = 0
 
         #* Создаём спрайт листы
         self.player_list = arcade.SpriteList()
@@ -82,6 +79,8 @@ class MyGame(arcade.Window):
         self.enemy_list = arcade.SpriteList()
         self.goblin_sprite = arcade.SpriteList()
         self.fireball_list = arcade.SpriteList()
+        self.dont_touch_list = arcade.SpriteList()
+        self.flag_list = arcade.SpriteList()
 
         #* Ссылаемся что список игрока равен классу что мы уже описали
         self.player_sprite = PlayerCharacter()
@@ -104,6 +103,8 @@ class MyGame(arcade.Window):
         self.background_list = arcade.process_layer(my_map, "background", TILE_SCALING)
         self.vilage_list = arcade.process_layer(my_map, "vilage", TILE_SCALING)
         self.wall_list = arcade.process_layer(my_map, "platforms", TILE_SCALING)
+        self.dont_touch_list = arcade.process_layer(my_map, "dont_touch", TILE_SCALING)
+        self.flag_list = arcade.process_layer(my_map, "flags", TILE_SCALING)
 
         #* --- Слой монеток ---
         coin_layer_name = "coins"
@@ -121,8 +122,6 @@ class MyGame(arcade.Window):
             self.enemy_list.append(enemy)
         self.goblin_physics_engine = arcade.PhysicsEnginePlatformer(self.goblin_sprite, self.wall_list, gravity_constant=GRAVITY)
 
-        #* --- Лестницы ---
-        #TODO: self.ladder_list = arcade.tilemap.process_layer(my_map, "Ladders", TILE_SCALING)
 
         #* Создаём физический движок
         self.physics_engine = arcade.PhysicsEnginePlatformer(self.player_sprite,
@@ -143,9 +142,9 @@ class MyGame(arcade.Window):
         self.player_list.draw()
         self.goblin_sprite.draw()
         self.fireball_list.draw()
+        self.dont_touch_list.draw()
 
-        #TODO: self.ladder_list.draw()
-        #TODO: self.coin_list.draw()
+        left, screen_width, bottom, screen_height = self.get_viewport()
 
         #* Отрисовка очков на экране, прокрутка по области просмотра
         # score_text = f"Score: {self.score}"
@@ -162,34 +161,11 @@ class MyGame(arcade.Window):
         dest_y = y
         x_diff = dest_x - start_x
         y_diff = dest_y - start_y
-        angle = math.atan2(y_diff, x_diff)
+        angle = 0 #math.atan2(y_diff, x_diff)
         fireball.angle = math.degrees(angle)
         fireball.change_x = math.cos(angle) * FIREBALL_SPEED
         fireball.change_y = math.sin(angle) * FIREBALL_SPEED
         self.fireball_list.append(fireball)
-
-
-        # arcade.play_sound(self.cast_sound)
-        # fireball = arcade.Sprite("resources/effects/FireBall_64x64.gif", FIREBALL_SCALE)
-        # if self.player_sprite.character_face_direction == FACE_LEFT:
-        #     fireball.angle = 90
-        #     fireball.change_x = -FIREBALL_SPEED
-        #     fireball.center_x = self.center_x
-        #     fireball.center_y = self.center_y
-        #     fireball.right = self.left
-        # elif self.player_sprite.character_face_direction == FACE_RIGHT:
-        #     fireball.angle = -90
-        #     fireball.change_x = FIREBALL_SPEED
-        #     fireball.center_x = self.center_x
-        #     fireball.center_y = self.center_y
-        #     fireball.left = self.right
-
-        # self.fireball_list.append(fireball)
-
-
-
-
-
 
 
 
@@ -235,8 +211,10 @@ class MyGame(arcade.Window):
             self.left_pressed = True
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.right_pressed = True
-        elif key == arcade.key.C:
-            self.cast_pressed = True
+        elif key == arcade.key.F:
+            self.set_fullscreen(not self.fullscreen)
+            width, height = self.get_size()
+            self.set_viewport(0, width, 0, height)
 
         self.process_keychange()
 
@@ -253,8 +231,6 @@ class MyGame(arcade.Window):
             self.left_pressed = False
         elif key == arcade.key.RIGHT or key == arcade.key.D:
             self.right_pressed = False
-        elif key == arcade.key.C:
-            self.cast_pressed = False
         
         self.process_keychange()
 
@@ -272,13 +248,13 @@ class MyGame(arcade.Window):
             enemy_fireball_hitlist = arcade.check_for_collision_with_list(fireball, self.enemy_list)
             if len(enemy_fireball_hitlist) > 0:
                 fireball.kill()
-            
             for enemy in enemy_fireball_hitlist:
                 enemy.kill()
                 arcade.play_sound(self.enemy_damage_sound)
+                if fireball.bottom > self.width or fireball.top < 0 or fireball.right < 0 or fireball.left > self.width:
+                    fireball.kill()
 
 
-        #* Обновление анимации
         if self.physics_engine.can_jump():
             self.player_sprite.can_jump = False
         else:
@@ -295,6 +271,7 @@ class MyGame(arcade.Window):
         coin_hit_list = arcade.check_for_collision_with_list(self.player_sprite,
                                                              self.coin_list)
         for coin in coin_hit_list:
+            arcade.play_sound(self.collect_coin_sound)
 
             # Figure out how many points this coin is worth
             if 'Points' not in coin.properties:
@@ -302,18 +279,18 @@ class MyGame(arcade.Window):
             else:
                 points = int(coin.properties['Points'])
                 self.score += points
-
-            # Remove the coin
             coin.remove_from_sprite_lists()
 
-        enemy_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.enemy_list)
-        for enemy in enemy_hit_list:
-            if "points" not in enemy.properties:
-                print("Warning, collected a coin without a Points property.")
-            else:
-                points = int(enemy.properties['Points'])
-                self.score += points
-            enemy.remove_from_sprite_lists()
+        if arcade.check_for_collision_with_list(self.player_sprite, self.enemy_list):
+            self.player_sprite.center_x = PLAYER_START_X
+            self.player_sprite.center_y = PLAYER_START_Y
+            arcade.play_sound(self.game_over)
+
+        if arcade.check_for_collision_with_list(self.player_sprite, self.dont_touch_list):
+            self.player_sprite.center_x = PLAYER_START_X
+            self.player_sprite.center_y = PLAYER_START_Y
+            arcade.play_sound(self.game_over)
+
 
         #* Логика отображающая не наткнулась ли движущаяся платформа
         #* на преграду и не надо ли повернуть движение.
@@ -353,7 +330,7 @@ class MyGame(arcade.Window):
             changed_viewport = True
 
         #* Скролинг вниз
-        bottom_boundary = self.view_bottom + VIEWPORT_RIGHT_MARGIN
+        bottom_boundary = 0 #self.view_bottom + VIEWPORT_RIGHT_MARGIN
         if self.player_sprite.bottom < bottom_boundary:
             self.view_bottom -= bottom_boundary - self.player_sprite.bottom
             changed_viewport = True
@@ -365,10 +342,8 @@ class MyGame(arcade.Window):
             self.view_left = int(self.view_left)
 
             #* Скролинг
-            arcade.set_viewport(self.view_left, 
-                                SCREEN_WIDTH + self.view_left, 
-                                self.view_bottom, 
-                                SCREEN_HEIGHT + self.view_bottom)
+            arcade.set_viewport(self.view_left, SCREEN_WIDTH + self.view_left, 
+                                self.view_bottom, SCREEN_HEIGHT + self.view_bottom)
 
 
 def main():

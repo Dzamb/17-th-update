@@ -101,24 +101,6 @@ class PlayerCharacter(arcade.Sprite):
             self.texture = self.attack_texture_pair[self.cur_texture // UPDATES_PER_FRAME][self.character_face_direction]
             return
 
-# def fireball_cast(self):
-#     arcade.play_sound(self.cast_sound)
-#     fireball = arcade.Sprite("resources/effects/FireBall_64x64.gif", FIREBALL_SCALE)
-#     if self.character_face_direction = FACE_LEFT:
-#         fireball.angle = 90
-#         fireball.change_x = -FIREBALL_SPEED
-#         fireball.center_x = self.center_x
-#         fireball.center_y = self.center_y
-#         fireball.right = self.left
-#     elif self.character_face_direction = FACE_RIGHT:
-#         fireball.angle = -90
-#         fireball.change_x = FIREBALL_SPEED
-#         fireball.center_x = self.center_x
-#         fireball.center_y = self.center_y
-#         fireball.left = self.right
-
-#     self.fireball_list.append(fireball)
-
 
     def cast(self):
         #* анимация каста заклинания
