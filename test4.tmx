@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="left-down" width="300" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="1">
+<map version="1.2" tiledversion="1.3.4" orientation="orthogonal" renderorder="left-down" width="300" height="80" tilewidth="16" tileheight="16" infinite="0" nextlayerid="11" nextobjectid="1">
  <tileset firstgid="1" name="background" tilewidth="4800" tileheight="1280" tilecount="1" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="1">
@@ -805,7 +805,7 @@
    <image width="16" height="16" source="resources/locations/dungeon/image_part_310.png"/>
   </tile>
  </tileset>
- <tileset firstgid="399" name="enemies" tilewidth="150" tileheight="150" tilecount="1" columns="0">
+ <tileset firstgid="399" name="enemies" tilewidth="150" tileheight="150" tilecount="2" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="150" height="150" source="resources/enemies/Goblin/Goblin_Idle_0.png"/>
@@ -815,8 +815,16 @@
     </object>
    </objectgroup>
   </tile>
+  <tile id="1">
+   <image width="128" height="96" source="resources/enemies/Knight Skeleton/idle_0.png"/>
+   <objectgroup draworder="index" id="2">
+    <object id="1" x="37.75" y="95.5">
+     <polygon points="0,0 0.5,-25.75 -4,-28.75 -6.5,-37.75 -2.5,-44 -2.75,-49.75 3.75,-52.75 3.5,-60.5 13.75,-60.5 13.25,-48.75 15,-46.75 24.75,-45.25 25,-20.5 18.5,-15.75 13.5,-12.5 16.5,0"/>
+    </object>
+   </objectgroup>
+  </tile>
  </tileset>
- <tileset firstgid="400" name="coins" tilewidth="128" tileheight="128" tilecount="5" columns="0">
+ <tileset firstgid="401" name="coins" tilewidth="128" tileheight="128" tilecount="5" columns="0">
   <grid orientation="orthogonal" width="1" height="1"/>
   <tile id="0">
    <image width="128" height="128" source="resources/treasures/coin_0.png"/>
@@ -878,27 +886,27 @@
  </layer>
  <layer id="8" name="flags" width="300" height="80">
   <data encoding="base64" compression="zlib">
-   eJzt2kEJAAAIADH7f6wsYghRtgCX4CIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYOTRNgAAAAAAAAAAwHdbD5b3CwAAAGgFchQCPQ==
+   eJzt2jEKwCAMBVDvv3jl7g5SJNHYvjeLxAzhQ2wNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmOlJZwEAOGslu8l7AMBXvM018g8A/FNmBpAvAO5hZgOR/MECAAAAAADYK2rnsnpPhZ1PRA0V3jE6VVPFXgAAAAD7PZY5Cg8=
   </data>
  </layer>
  <layer id="9" name="dont_touch" width="300" height="80">
   <data encoding="base64" compression="zlib">
-   eJzty7EJAAAIwDD/v9QzXJ0ExTGBjo0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPiRrcuz+b5+AAAAYFbJUwn5
+   eJzt27ENACAMA7DyBP+f1zNYgQ0YEMKWMlbNA4kAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4U3YBAAAAAAAAALilljEAAAAAAPC6nf1extnu7/R+1/x3tcOt3gAAALCqARqRFwU=
   </data>
  </layer>
  <layer id="10" name="coins" width="300" height="80">
   <data encoding="base64" compression="zlib">
-   eJzt2rENAEAIAkDHdf8JnOC/siDxLqGHnioAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA+OtHAAAAAAAAAAAAyJP499rqlLQJAAAALhlwhge5
+   eJzt2rENwCAMBECyLVtkBjZOS4OUxpg4d9K3yBWyrG8NAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL7hngIAkKlPAQCgluxdz+0LAMjg1gUAvNUXAeA/dv77eqNQm30SAAAAAAAA4p3Y9zpplioiuhXjCngUAACAEh6Qhg8b
   </data>
  </layer>
  <layer id="3" name="platforms" width="300" height="80">
   <data encoding="base64" compression="zlib">
-   eJztzMEJACAMBME0p5ag/VdiiohIYAaO/V0EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD0tYoG8Moo/pvFfwAAAAAAAAAAAMA/O3dUVRv0As1ibBQ=
+   eJzt2sEJgEAMBEB9WZlagvbfgC1oBwZJDiIzEPZ3z5ALmSYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACDLFSwAgCrLHCsAAHqJznmV856dFxDhzwlUqJh/9CugC/0K4vak4hv9Ct6tye9tye91N3qH7l4U/s0NFgAAAAAAAAAAox1PnVJK2SBvoi2H+A==
   </data>
  </layer>
  <layer id="7" name="enemies" width="300" height="80">
   <data encoding="base64" compression="zlib">
-   eJzt2MEJACAMBMGk/4ct20JQQhBnKrjvbQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQN3K6QUAAAAAAPCvm06v8QMAALzl9Mf5f3TYYp4C0Q==
+   eJzt2cEJADAIA8B2/09H7goFLYLeTWA+IeBaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwKuzqy8AAOAnew8AmMgGAgCy2RcAPel3IJNOAQAAAAAAqBP51XT483TIEDE9PwAAABBzAZAABas=
   </data>
  </layer>
 </map>

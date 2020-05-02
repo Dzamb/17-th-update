@@ -43,6 +43,7 @@ class MyGame(arcade.Window):
         self.goblin_sprite = None
         self.fireball_list = None
         self.flag_list = None
+        self.goblin_physics_engine = None
 
         #* Используем для отслеживания нашего скролинга
         self.view_bottom = 0
@@ -115,12 +116,27 @@ class MyGame(arcade.Window):
         e_list = arcade.process_layer(my_map, enemy_layer_name, TILE_SCALING)
         for e in e_list:
             enemy = Goblin()
+            enemy.stand_right_textures = []
+            enemy.stand_left_textures = []
+            enemy.walk_right_textures = []
+            enemy.walk_left_textures = []
+            for i in range(4):
+                enemy.stand_right_textures.append(arcade.load_texture(f"resources/enemies/Knight Skeleton/idle_{i}.png"))
+            for i in range(4):
+                enemy.stand_left_textures.append(arcade.load_texture(f"resources/enemies/Knight Skeleton/idle_{i}.png", mirrored=True))
+            for i in range(6):
+                enemy.walk_right_textures.append(arcade.load_texture(f"resources/enemies/Knight Skeleton/walk_{i}.png"))
+            for i in range(6):
+                enemy.walk_left_textures.append(arcade.load_texture(f"resources/enemies/Knight Skeleton/walk_{i}.png", mirrored=True))
+
+            enemy.texture_change_distance = 20
             enemy.center_x = e.center_x
-            enemy.center_y = e.center_y + 64
+            enemy.center_y = e.center_y
             enemy.scale = 1
-            enemy.change_x = -ENEMY_SPEED
+            enemy.change_x = ENEMY_SPEED
+            enemy.goblin_physics_engine = arcade.PhysicsEnginePlatformer(self.goblin_sprite, self.wall_list, gravity_constant=GRAVITY)
             self.enemy_list.append(enemy)
-        self.goblin_physics_engine = arcade.PhysicsEnginePlatformer(self.goblin_sprite, self.wall_list, gravity_constant=GRAVITY)
+        
 
 
         #* Создаём физический движок
@@ -239,10 +255,16 @@ class MyGame(arcade.Window):
         self.player_list.update_animation()
         self.wall_list.update()
 
-        #* Движение игрока с физическим движком
         self.physics_engine.update()
         self.coin_list.update_animation()
+
         self.enemy_list.update_animation()
+        for enemy in self.enemy_list:
+            enemy.center_x += enemy.change_x
+            enemy_flag_hitlist = arcade.check_for_collision_with_list(enemy, self.flag_list)
+            if enemy_flag_hitlist:
+                enemy.change_x = -enemy.change_x
+
         self.fireball_list.update()
         for fireball in self.fireball_list:
             enemy_fireball_hitlist = arcade.check_for_collision_with_list(fireball, self.enemy_list)

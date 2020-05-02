@@ -14,7 +14,7 @@ PLAYER_SCALING = 0.5
 PLAYER_START_X = 196        #* 196
 PLAYER_START_Y = 200        #* 200
 PLAYER_MOVEMENT_SPEED = 7
-PLAYER_JUMP_SPEED = 25
+PLAYER_JUMP_SPEED = 20 #25
 
 # How many pixels to keep as a minimum margin between the character
 # and the edge of the screen.
